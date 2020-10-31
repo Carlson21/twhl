@@ -6,6 +6,9 @@ import urllib.request
 
 from bot import *
 
+CLIENT_ID = os.getenv("CLIENT_ID")
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+
 GAMES = ["IRL",
             "Counter-Strike: Global Offensive",
             "Among Us",
@@ -60,17 +63,13 @@ def parse_clip(game):
 
 def download(url, nick):
     dcn = open('Downloaded_Clips_Names.txt', 'r')
-    client_id = '8cj0jqucouj6uv8h5aa46g4n8hmfvt'
-    access_token = 'ixuz1qlsuybgc7k46yni9sq2uxg4is'
     basepath = 'clips/'
     slug = url.replace('https://clips.twitch.tv/', '')
     clip_info = requests.get("https://api.twitch.tv/helix/clips?id=" + slug,
-                             headers={"Client-ID": client_id, "Authorization": "Bearer " + access_token}).json()
+                             headers={"Client-ID": CLIENT_ID, "Authorization": "Bearer " + ACCESS_TOKEN}).json()
     thumb_url = clip_info['data'][0]['thumbnail_url']
     mp4_url = thumb_url.split("-preview", 1)[0] + ".mp4"
     out_file = basepath + slug + ".mp4"       
-    print('OKOKOKOKOKOKOKOK')
-
 
     def dl_progress(count, block_size, total_size):
         if total_size / 1024**2 <= 10:
@@ -87,7 +86,7 @@ def download(url, nick):
         try:
             urllib.request.urlretrieve(mp4_url, out_file, reporthook=dl_progress)
         except:
-            print(sys.exc_info(), '333333333')
+            print(sys.exc_info())
         dcn_write = open('Downloaded_Clips_Names.txt', 'a')
         dcn_write.write(slug + '\n')
         dcn_write.close()
@@ -95,7 +94,7 @@ def download(url, nick):
 
 
     except:
-        print(sys.exc_info(),'2222222222222222222')
+        print(sys.exc_info())
 
 
 while True:
