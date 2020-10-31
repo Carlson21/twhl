@@ -52,7 +52,7 @@ def parse_clip(game):
     try:
         edges = r_json[0]['data']['game']['clips']['edges']
         urls = [edge['node']['url'] for edge in edges]
-        nick_names = [edge['node']['curator']['login'] for edge in edges]
+        nick_names = [edge['node']['broadcaster']['displayName'] for edge in edges]
         for number, url in enumerate(urls):
             print(url, number)
             download(url, nick_names[number])
