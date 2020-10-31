@@ -42,7 +42,6 @@ GAMES = ["IRL",
 def parse_clip(game):
 
     url = "https://gql.twitch.tv/gql"
-    #json_req = """[{"query":"query ClipsCards__Game($gameName: String!, $limit: Int, $cursor: Cursor, $criteria: GameClipsInput) { game(name: $gameName) { id clips(first: $limit, after: $cursor, criteria: $criteria) { pageInfo { hasNextPage __typename } edges { cursor node { id slug url embedURL title viewCount language curator { id login displayName __typename } game { id name boxArtURL(width: 52, height: 72) __typename } broadcaster { id login displayName __typename } thumbnailURL createdAt durationSeconds __typename } __typename } __typename } __typename } } ","variables":{"gameName":"Dota 2","limit":100,"criteria":{"languages":[],"filter":"LAST_DAY"},"cursor":"MjA="},"operationName":"ClipsCards__Game"}]"""
     json_req = """[{"query":"query ClipsCards__Game($gameName: String!, $limit: Int, $cursor: Cursor, $criteria: GameClipsInput) { game(name: $gameName) { id clips(first: $limit, after: $cursor, criteria: $criteria) { pageInfo { hasNextPage __typename } edges { cursor node { id slug url embedURL title viewCount language curator { id login displayName __typename } game { id name boxArtURL(width: 52, height: 72) __typename } broadcaster { id login displayName __typename } thumbnailURL createdAt durationSeconds __typename } __typename } __typename } __typename } } ","variables":{"gameName":~,"limit":100,"criteria":{"languages":[],"filter":"LAST_DAY"},"cursor":"MjA="},"operationName":"ClipsCards__Game"}]"""
     json_req = json_req.replace("~", '"' + game + '"')
     r = requests.post(url, data=json_req, headers={"client-id":"kimne78kx3ncx6brgo4mv6wki5h1ko"})
@@ -64,7 +63,7 @@ def download(url, nick):
     dcn = open('Downloaded_clips_names.txt', 'r')
     client_id = '8cj0jqucouj6uv8h5aa46g4n8hmfvt'
     access_token = 'ixuz1qlsuybgc7k46yni9sq2uxg4is'
-    basepath = 'C://Users//kljhklj//Desktop//bot//Project//clips//'
+    basepath = 'clips/'
     slug = url.replace('https://clips.twitch.tv/', '')
     clip_info = requests.get("https://api.twitch.tv/helix/clips?id=" + slug,
                              headers={"Client-ID": client_id, "Authorization": "Bearer " + access_token}).json()
@@ -103,9 +102,3 @@ def download(url, nick):
 while True:
     for game in GAMES:
         parse_clip(game)
-
-
-#curl -H "Accept: application/vnd.twitchtv.v5+json" -H "Client-ID: 8cj0jqucouj6uv8h5aa46g4n8hmfvt" -X GET "https://api.twitch.tv/kraken/clips/BadUnusualBoarCurseLit"
-#GET https://id.twitch.tv/oauth2/authorize?client_id='8cj0jqucouj6uv8h5aa46g4n8hmfvt'&redirect_uri='https://ClipScrapper/'&response_type=code
-#POST "https://id.twitch.tv/oauth2/token?client_id=8cj0jqucouj6uv8h5aa46g4n8hmfvt&client_secret=p8ts9xu0d5ywnwuzgfayo7uzzrycil&grant_type=client_credentials&scope='clips edit'"
-#-------------{"access_token":"gl5vni8qolq1isqrpn93iieh71sy4b","expires_in":5221664,"scope":["clips:edit"],"token_type":"bearer"}
