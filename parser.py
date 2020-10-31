@@ -46,7 +46,6 @@ def parse_clip(game):
     json_req = json_req.replace("~", '"' + game + '"')
     r = requests.post(url, data=json_req, headers={"client-id":"kimne78kx3ncx6brgo4mv6wki5h1ko"})
     r_json = r.json()
-    print(r_json)
     try:
         edges = r_json[0]['data']['game']['clips']['edges']
         urls = [edge['node']['url'] for edge in edges]
@@ -87,7 +86,7 @@ def download(url, nick):
         try:
             urllib.request.urlretrieve(mp4_url, out_file, reporthook=dl_progress)
         except:
-            print(sys.exc_info())
+            print(sys.exc_info(), '333333333')
         dcn_write = open('Downloaded_Clips_Names.txt', 'a')
         dcn_write.write(slug + '\n')
         dcn_write.close()
