@@ -1,1 +1,1 @@
-web: run parser.py
+worker: parser.py
