@@ -59,10 +59,7 @@ def parse_clip(game):
 
 
 def download(url, nick):
-    try:
-            dcn = open('Downloaded_clips_names.txt', 'r')
-    except:
-            print('111111111111111111')
+    dcn = open('Downloaded_Clips_Names.txt', 'r')
     client_id = '8cj0jqucouj6uv8h5aa46g4n8hmfvt'
     access_token = 'ixuz1qlsuybgc7k46yni9sq2uxg4is'
     basepath = 'clips/'
