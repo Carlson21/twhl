@@ -2,7 +2,6 @@ import telebot
 import time
 import os
 
-#url = "https://api.telegram.org/bot1250883576:AAFe-Wp9Uk4lVRX3syccH6ALbs91bsBSkXA/"
 TOKEN = "1250883576:AAFe-Wp9Uk4lVRX3syccH6ALbs91bsBSkXA"
 bot = telebot.TeleBot(TOKEN)
 
