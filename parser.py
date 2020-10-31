@@ -80,15 +80,14 @@ def download(url, nick):
         else:
             raise IOError("Too heavy")
 
-    if not os.path.exists(basepath):
-        os.makedirs(basepath)
-
-
     try:
         check = slug in dcn.read()
         if check is True:
             raise IOError("Already added")
-        urllib.request.urlretrieve(mp4_url, out_file, reporthook=dl_progress)
+        try:
+            urllib.request.urlretrieve(mp4_url, out_file, reporthook=dl_progress)
+        except:
+            print(sys.exc_info())
         dcn_write = open('Downloaded_Clips_Names.txt', 'a')
         dcn_write.write(slug + '\n')
         dcn_write.close()
