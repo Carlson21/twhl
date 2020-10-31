@@ -68,7 +68,8 @@ def download(url, nick):
                              headers={"Client-ID": client_id, "Authorization": "Bearer " + access_token}).json()
     thumb_url = clip_info['data'][0]['thumbnail_url']
     mp4_url = thumb_url.split("-preview", 1)[0] + ".mp4"
-    out_file = basepath + slug + ".mp4"
+    out_file = basepath + slug + ".mp4"       
+    print('OKOKOKOKOKOKOKOK')
 
 
     def dl_progress(count, block_size, total_size):
@@ -94,7 +95,7 @@ def download(url, nick):
 
 
     except:
-        print(sys.exc_info())
+        print(sys.exc_info(),'2222222222222222222')
 
 
 while True:
